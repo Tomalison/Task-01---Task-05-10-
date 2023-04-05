@@ -1,0 +1,45 @@
+練習：You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+❏ Requirements：
+
+1. 讓使用者輸入一個數字 n ，代表需要爬到的階層數量
+
+2. 每次可以往上移動一階或兩階，計算爬到 n 階有幾種可能的走法
+
+❏ Sample Input #1: 2 ← 使用者輸入
+
+❏ Sample Output #1: 2 ← 畫面輸出（說明：爬到 2 階可能是 1 + 1 or 2）
+
+❏ Sample Input #2: 3 ← 使用者輸入
+
+❏ Sample Output #2: 3 ← 畫面輸出（說明：爬到 3 階可能是 1 + 1 + 1 or 1 + 2 or 2 + 1）
+
+def climb_stairs(n):
+
+if n == 1:
+
+return 1
+
+if n == 2:
+
+return 2
+
+dp = [0 for i in range(n+1)]
+
+dp[1] = 1
+
+dp[2] = 2
+
+for i in range(3, n+1):
+
+dp[i] = dp[i-1] + dp[i-2]
+
+return dp[n]
+
+
+
+n = int(input("請輸入階層數量："))
+
+ways = climb_stairs(n)
+
+print("到達%d階的走法有%d種" % (n, ways))
