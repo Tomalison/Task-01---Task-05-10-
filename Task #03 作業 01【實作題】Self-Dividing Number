@@ -1,0 +1,52 @@
+練習：Self-Dividing Number（自除數）指的是可以被每位數的數字整除的數，例如，128 可以同時被 1、2、8 分別整除即符合。本題請根據輸入的上下邊界，找出該區間內的 Self-Dividing Number 中哪兩個數之間的差距最大。舉個例子，假如從 11 - 20 符合的數有：11、12、15，其中 11 跟 12 的差距等於 1、12 跟 15 的差距等於 3，因此差距最大是 12 跟 15。
+
+❏ Requirements：
+
+1. 讓使用者輸入兩個數字，代表一個區間
+
+2. 請利用程式找出該區間中符合 Self-Dividing Number 的所有數
+
+3. 將差距最大的 Self-Dividing Number 相鄰兩數印出
+
+❏ Sample Input #1: 11, 20 ← 使用者輸入
+
+❏ Sample Output #1: (12, 15) ← 畫面輸出
+
+❏ Sample Input #2: 100, 900 ← 使用者輸入
+
+❏ Sample Output #2: (555, 612) ← 畫面輸出
+
+def is_self_dividing(num):
+    """
+    判斷一個數是否為自除數
+    """
+    digits = [int(d) for d in str(num)]
+    for digit in digits:
+        if digit == 0 or num % digit != 0:
+            return False
+    return True
+
+# 讓使用者輸入區間
+start = int(input("請輸入起始數字: "))
+end = int(input("請輸入終止數字: "))
+
+# 找出區間內所有的 Self-Dividing Number
+self_dividing_nums = []
+for num in range(start, end + 1):
+    if is_self_dividing(num):
+        self_dividing_nums.append(num)
+
+# 找出差距最大的相鄰 Self-Dividing Number
+max_diff = 0
+max_diff_index = -1
+for i in range(len(self_dividing_nums) - 1):
+    diff = self_dividing_nums[i+1] - self_dividing_nums[i]
+    if diff > max_diff:
+        max_diff = diff
+        max_diff_index = i
+
+# 輸出答案
+if max_diff_index != -1:
+    print("差距最大的 Self-Dividing Number 為 %d 和 %d，差距為 %d。" % (self_dividing_nums[max_diff_index], self_dividing_nums[max_diff_index+1], max_diff))
+else:
+    print("在範圍內沒有 Self-Dividing Number。")
