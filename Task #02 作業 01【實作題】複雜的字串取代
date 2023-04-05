@@ -1,0 +1,6 @@
+s = input("請輸入字串: ")
+if "not" in s and "at all" in s:
+    not_index = s.find("not")
+    at_all_index = s.find("at all") + len("at all")
+    s = s[:not_index] + "good" + s[at_all_index:]
+print(s)
